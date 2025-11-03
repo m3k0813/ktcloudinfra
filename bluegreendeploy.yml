@@ -60,3 +60,24 @@ spec:
           ports:
             - containerPort: 80
 
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: cron-scaler
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: ktcloud-blue
+  pollingInterval: 30
+  cooldownPeriod: 300
+  minReplicaCount: 3
+  maxReplicaCount: 6
+  triggers:
+    - type: cron
+      metadata:
+        timezone: "Asia/Seoul"
+        start: "46 * * * *"
+        end: "50 * * * *"
+        desiredReplicas: "6"
+
