@@ -36,31 +36,6 @@ spec:
           ports:
             - containerPort: 80
 ---
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: ktcloud-green
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      color: green
-  template:
-    metadata:
-      labels:
-        color: green
-    spec:
-      containers:
-        - name: ktcloudctn-green
-          image: zmflspa123/ktcloudinfra:green
-          resources:
-            limits:
-              memory: "32Mi"
-              cpu: "250m"
-          ports:
-            - containerPort: 80
-
----
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
@@ -80,4 +55,5 @@ spec:
         start: "46 * * * *"
         end: "50 * * * *"
         desiredReplicas: "6"
+
 
